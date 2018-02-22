@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Birb Fight!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  </head>
+  <body>
+
+    <div class="page-wrapper">
+        <div class="main">
+            <div class="row">
+                <div id="game-title"><h1> Birb Fight </h1></div>
+            </div>
+
+            <div class="row">
+                <div id="instruction"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div id="owl"><img src="assets/images/owl_.jpg"></div>
+                </div>
+                <div class="col-sm-3">
+                    <div id="toucan"><img src="assets/images/toucan_.jpg"></div>
+                </div>
+                <div class="col-sm-3">
+                    <div id="pheasant"><img src="assets/images/pheasant_.jpg"></div>
+                </div>
+                <div class="col-sm-3">
+                    <div id="wren"><img src="assets/images/wren_.jpg"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div id="your-bird"></div>
+                    </div>
+                    <div class="row">
+                        <div id="your-score"></div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="row">
+                <div id="attack-button"><button type="button" class="btn btn-danger">ATTACK!</button></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div id="enemy-bird"></div>
+                    </div>
+                    <div class="row">
+                        <div id="enemy-score"></div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="row">
+                <div id="defeated-birbs"></div>
+            </div>
+        </div>
+           
+    </div>
+   
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script>
+        
+        var owl = {hp:100, attack:10, cAttack:5, undefeated: true};
+        var toucan = {hp:120, attack:6, cAttack:15, undefeated: true};
+        var pheasant = {hp:150, attack:15, cAttack:20, undefeated: true};
+        var wren = {hp:180, attack:18, cAttack:25, undefeated: true};
+
+        var birbs = [owl, toucan, pheasant, wren];
+
+        var userBirb;
+        var enemyBird;
+        var userScore;
+        var enemyScore;
+        
+        
+        $("#instruction").html("Choose your birb!");
+
+        $('#owl').on('click', function ()  {
+               //the below conditional isn't working, still need to find a way to define userBird has/has not been assigned
+            if (userBirb = owl || toucan || pheasant || wren) {
+                enemyBirb = owl;
+                console.log('enemyBirb', enemyBirb);
+                $('#instruction').html('Attac fren attac!!');
+            }
+            else {
+                userBirb = owl;
+                console.log('userBirb', userBirb);
+                $('#instruction').html('Choose an enemy birb to battle. Choose wisely.');
+
+            }
+         }); 
+
+         $('#toucan').on('click', function ()  {
+            if (userBirb = owl || toucan || pheasant || wren) {
+                enemyBirb = toucan;
+                console.log('enemyBirb', enemyBirb);
+                $('#instruction').html('Attac fren attac!!');
+                
+            }
+            else {
+                userBirb = toucan;
+                console.log('userBirb', userBirb);
+                $('#instruction').html('Choose an enemy birb to battle. Choose wisely.');
+            }
+         }); 
+         $('#pheasant').on('click', function ()  {
+            if (userBirb = owl || toucan || pheasant || wren) {
+                enemyBirb = pheasant;
+                console.log('enemyBirb', enemyBirb);
+                $('#instruction').html('Attac fren attac!!');
+
+            }
+            else {
+                userBirb = pheasant;
+                console.log('userBirb', userBirb);
+                $('#instruction').html('Choose an enemy birb to battle. Choose wisely.');
+            }
+         }); 
+         $('#wren').on('click', function ()  {
+            if (userBirb = owl || toucan || pheasant || wren) {
+                enemyBirb = wren;
+                console.log('enemyBirb', enemyBirb);
+                $('#instruction').html('Attac fren attac!!');
+            }
+                
+            else {
+                userBirb = wren;
+                console.log('userBirb', userBirb);
+                $('#instruction').html('Choose an enemy birb to battle. Choose wisely.');
+            }
+         }); 
+
+         ('#attack-button').on('click', function (){
+             enemyScore = enemyBirb.hp - userBirb.attack;
+             userScore = userBirb.hp - enemyBirb.cAttack;
+             $('#user-score').html(userScore);
+             $('#enemy-score').html(enemyScore);
+                if ( userBirb.hp <= 0) {
+                    alert('You chose poorly. Press restart to play again.');
+                }
+                else if (enemyBirb <= 0) {
+                    //change or remove the undeafeated value
+                    //move enemyBird to defeated div
+                       // if (check birbs array for undefeated keys) {
+                            $('#instruction').html("Good job. You win. Press restart to play again.")
+                        //}
+                        //else {
+                            $('#instruction').html('Bummer. You lost. Press restart to play again.')
+                        //}
+                        
+                }
+
+         })
+
+
+        //set up on click events for the 4 birbs.
+        //user chooses their birb, their birb moves to the your-birb div, variable userBirb = whatever birb they chose
+        //instruction div changes to 'choose an enemy birb'
+        //user chooses enemy birb, enemy birb moves to the 'enemy-birb' div, variable enemyBirb = whatever birb they chose
+        //instruction div changes to 'Attack!'
+        //bind attack button to function that = subtracts userBirb.attack from enemyBirb.hp, prints HP values for both birbs and compares 
+        //both hp values to 0
+        //if user.hp <= 0, alert you lose, if enemy birb.hp <=0, else if are there any birbs left, else either pick a new birb to fight or you win.
+
+        
+        
+        </script>
+
+        
+  </body>
+</html>
